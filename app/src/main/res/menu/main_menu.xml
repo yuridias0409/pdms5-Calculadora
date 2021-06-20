@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/calcNormal"
+        android:title="Calculadora Normal"
+        android:icon="@drawable/ic_calculate_normal_icon"
+        />
+    <item
+        android:id="@+id/calcAvancada"
+        android:title="Calculadora Avançada"
+        android:icon="@drawable/ic_calculate_advanced_icon"
+        />
+</menu>
