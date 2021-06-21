@@ -68,9 +68,9 @@ public class CalculadoraSimplesActivity extends AppCompatActivity {
         //Verifica se o botão clicado foi um operador
         Pattern pattern = Pattern.compile("√|=|\\+|-|÷|X|%|\\^", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(botaoClicadoText);
-        boolean isCaracter = matcher.find();
+        boolean isOperador = matcher.find();
 
-        if(isCaracter){ //É um número
+        if(isOperador){ //É um número
             if(botaoClicadoText.equals("=")){
                 conta = conta + numeroAtual;
                 activityCalculadoraSimplesBinding.calcContaTv.setText(conta);
@@ -88,28 +88,30 @@ public class CalculadoraSimplesActivity extends AppCompatActivity {
                 numeros = new ArrayList<>();
                 numeroAtual = "";
             }   else{
-                numeros.add(Double.parseDouble(numeroAtual));
+                if(!numeroAtual.equals("")){
+                    numeros.add(Double.parseDouble(numeroAtual));
 
-                if(botaoClicadoText.equals("X")){
-                    botaoClicadoText = "*";
-                }   else if(botaoClicadoText.equals("÷")){
-                    botaoClicadoText = "/";
+                    if(botaoClicadoText.equals("X")){
+                        botaoClicadoText = "*";
+                    }   else if(botaoClicadoText.equals("÷")){
+                        botaoClicadoText = "/";
+                    }
+
+                    if(conta.equals("")){
+                        conta = numeroAtual + botaoClicadoText;
+                    }   else{
+                        conta = conta + numeroAtual + botaoClicadoText;
+                    }
+
+                    //operadores.add(botaoClicadoText);
+
+                    //Mostra conta inteira
+                    activityCalculadoraSimplesBinding.calcContaTv.setText(conta);
+
+                    //Limpa para o imput do próximo número
+                    activityCalculadoraSimplesBinding.calcResultadoTv.setText("0");
+                    numeroAtual = "";
                 }
-
-                if(conta.equals("")){
-                    conta = numeroAtual + botaoClicadoText;
-                }   else{
-                    conta = conta + numeroAtual + botaoClicadoText;
-                }
-
-                //operadores.add(botaoClicadoText);
-
-                //Mostra conta inteira
-                activityCalculadoraSimplesBinding.calcContaTv.setText(conta);
-
-                //Limpa para o imput do próximo número
-                activityCalculadoraSimplesBinding.calcResultadoTv.setText("0");
-                numeroAtual = "";
             }
         }   else{ //Não é um operador
             if(botaoClicadoText.equals("C")){
